@@ -133,14 +133,14 @@ npm start
 
 ##  Live Demo
 
-🔗 Live Website: https://your-live-link.com
-🔗 Backend API: https://your-api-link.com
+🔗 Live Website: 
+🔗 Backend API: 
 
 ---
 
 ##  Screenshots
 
-(Add screenshots here of login/signup/dashboard)
+(Adding screenshots here of login/signup/dashboard)
 
 ---
 
