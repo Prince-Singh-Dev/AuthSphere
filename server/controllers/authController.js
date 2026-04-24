@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import userModel from "../models/userModel.js";
+import transporter from "../config/nodemailer.js";
 
 // User registration Controller
 export const register = async(req,res)=>{
@@ -23,6 +24,16 @@ export const register = async(req,res)=>{
             sameSite:process.env.NODE_ENV === 'production' ? 'none' : 'strict',
             maxAge:7*24*60*60*1000
         });
+
+        // Sending welcome Email
+        const mailOptions = {
+            from : process.env.SENDER_EMAIL,
+            to : email,
+            subject : "Welcome to AuthSphere",
+            text : `Hello ${name},\n\nWelcome to AuthSphere! We're excited to have you on board. If you have any questions or need assistance, feel free to reach out.\n\nBest Regards,\nAuthSphere Team`
+        }
+        await transporter.sendMail(mailOptions);
+        
         return res.json({success:true});
     }catch(error){
         res.json({success:false,message:error.message})
