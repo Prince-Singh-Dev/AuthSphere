@@ -82,3 +82,28 @@ export const logout = async (req,res)=>{
         return res.json({success:false,message:error.message});
     }
 }
+
+// Send Verifcation OTP Controller
+export const sendVerifyOtp = async (req,res)=>{
+    try{
+        const {userID}=req.body;
+        const user = await userModel.findById(userId);
+        if(user.isAccountVerified){
+            return res.json({success:false,message:"Account Already Verified"})
+        }
+        const otp = String(Math.floor(100000+Math.random()*900000));
+        user.verifyOtp = otp;
+        user.verifyOtpExpiry = Date.now() + 10*60*1000;
+        await user.save();
+        const mailOptions = {
+            from : process.env.SENDER_EMAIL,
+            to : user.email,
+            subject : "Account Verification OTP",
+            text : `Your OTP is ${otp}. Verify your account using this OTP. It is valid for 10 minutes.`
+        }
+        await transporter.sendMail(mailOptions);
+        return res.json({success:true,message:"Verification OTP sent to Email"})
+    }catch(error){
+        res.json({success:false,message:error.message});
+    }
+}
