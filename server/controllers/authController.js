@@ -86,14 +86,14 @@ export const logout = async (req,res)=>{
 // Send Verifcation OTP Controller
 export const sendVerifyOtp = async (req,res)=>{
     try{
-        const {userID}=req.body;
+        const {userId}=req.body;
         const user = await userModel.findById(userId);
         if(user.isAccountVerified){
             return res.json({success:false,message:"Account Already Verified"})
         }
         const otp = String(Math.floor(100000+Math.random()*900000));
         user.verifyOtp = otp;
-        user.verifyOtpExpiry = Date.now() + 10*60*1000;
+        user.verifyOtpExpireAt = Date.now() + 10*60*1000;
         await user.save();
         const mailOptions = {
             from : process.env.SENDER_EMAIL,
@@ -111,24 +111,24 @@ export const sendVerifyOtp = async (req,res)=>{
 // Verifying OTP controller
 
 export const verifyEmail = async (req,res)=>{
-    const {userID,otp}=req.body;
+    const {userId,otp}=req.body;
     if(!userId || !otp){
         return res.json({success : false,message:'Missing Details'})
     }
     try{
-        const user = await userModel.findById(userID);
+        const user = await userModel.findById(userId);
         if(!user){
             return res.json({success:false,message:'User Not Found'});
         }
         if(user.verifyOtp === '' || user.verifyOtp !== otp){
             return res.json({success:false,message:'Invalid OTP'});
         }
-        if(user.verifyOtpExpiryAt < Date.now()){
+        if(user.verifyOtpExpireAt < Date.now()){
             return res.json({success:false,message:'OTP Expired'});
         }
         user.isAccountVerified = true;
         user.verifyOtp = '';
-        user.verifyExpiresAt = 0;
+        user.verifyOtpExpireAt = 0;
         await user.save();
         return res.json({success:true,message:'Account Verified SuccessFully'})
     }catch(error){
