@@ -8,9 +8,14 @@ const userAuth = async (req,res,next)=>{
     try{
         const tokenDecode = jwt.verify(token,process.env.JWT_SECRET);
         if(tokenDecode.id){
-            req.body.userId = tokenDecode.id
+            // Safe for both GET and POST
+            if (!req.body) req.body = {};
+            req.body.userId = tokenDecode.id;
+
+            // Also added this (new standard way)
+            req.userId = tokenDecode.id;
         }else{
-            return res.json({succees:false,message:'Not Authorized. Login Again'});
+            return res.json({success:false,message:'Not Authorized. Login Again'});
         }
         next();
     }catch(error){
