@@ -1,175 +1,152 @@
-#  AuthSphere – Secure MERN Authentication Platform
+# 🔐 AuthSphere – Full Stack Authentication System
 
-AuthSphere is a full-stack web application built using the MERN stack that provides a secure and scalable user authentication system. It includes user registration, login, protected routes, and a fully deployed production-ready environment.
-
----
-
-##  About The Project
-
-AuthSphere is designed to demonstrate real-world backend architecture and secure authentication practices. It focuses on building a robust system where users can safely register, log in, and manage their sessions.
-
-This project is not just a basic login system — it represents a production-level authentication flow with proper backend handling, database management, and deployment.
+AuthSphere is a production-ready authentication system built using the MERN stack. It provides secure user authentication with JWT, email verification via OTP, password reset functionality, and cookie-based session management.
 
 ---
 
-##  Tech Stack
+## 🚀 Live Demo
+
+* 🌐 Frontend: https://authsphere-dfzp.onrender.com
+* ⚙️ Backend API: https://authsphere-backend-tue6.onrender.com
+
+---
+
+## 🧠 Features
+
+* 🔐 User Registration & Login
+* 🍪 JWT Authentication using **httpOnly cookies**
+* 📧 Email Verification with OTP
+* 🔄 Password Reset via OTP
+* 🔒 Protected Routes
+* 🚪 Secure Logout
+* 🌐 Fully deployed (Frontend + Backend on Render)
+
+---
+
+## 🛠️ Tech Stack
 
 ### Frontend
 
-* React.js
+* React (Vite)
+* Tailwind CSS
 * Axios
-* React Router
 
 ### Backend
 
 * Node.js
 * Express.js
-
-### Database
-
-* MongoDB (Mongoose ODM)
-
-### Authentication & Security
-
-* JSON Web Tokens (JWT)
-* Bcrypt.js (Password Hashing)
-* Protected Routes & Middleware
-
-### Deployment
-
-* Frontend: Render
-* Backend: Render
-* Database: MongoDB Atlas
+* MongoDB (Mongoose)
+* JWT (Authentication)
+* bcryptjs (Password Hashing)
+* Nodemailer (Email Service)
 
 ---
 
-##  Features
+## ⚙️ Environment Variables
 
-*  User Signup & Login System
-*  Secure Password Hashing using Bcrypt
-*  JWT-based Authentication
-*  Protected Routes (Frontend + Backend)
-*  RESTful API Architecture
-*  Fully Deployed Live Application
-*  Fast and Responsive UI
+### Backend (`.env`)
+
+```
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+NODE_ENV=production
+CLIENT_URL=your_frontend_url
+
+SMTP_HOST=smtp-relay.brevo.com
+SMTP_PORT=587
+SMTP_USER=your_email
+SMTP_PASS=your_api_key
+SENDER_EMAIL=your_email
+```
+
+### Frontend (`.env`)
+
+```
+VITE_BACKEND_URL=your_backend_url
+```
 
 ---
 
-##  Project Structure
+## 📁 Project Structure
 
 ```
 AuthSphere/
 │
-├── client/        # React Frontend
-│   ├── src/
-│   └── public/
+├── client/        # Frontend (React + Vite)
 │
-├── server/        # Node + Express Backend
-│   ├── routes/
-│   ├── controllers/
-│   ├── models/
-│   └── middleware/
+├── server/        # Backend (Express + MongoDB)
 │
 └── README.md
 ```
 
 ---
 
-## Workflow
+## 🔑 Authentication Flow
 
-1. User registers with email & password
-2. Password is hashed using Bcrypt
-3. Data is stored securely in MongoDB
-4. User logs in → JWT token is generated
-5. Token is used to access protected routes
-6. Middleware verifies authentication
+1. User registers → password hashed using bcrypt
+2. JWT token generated and stored in httpOnly cookie
+3. Email verification via OTP
+4. Login → token stored securely in cookies
+5. Protected routes validated using middleware
+6. Password reset via OTP system
 
 ---
 
-##  Installation & Setup
+## 🧪 Run Locally
 
-### 1. Clone the Repository
+### Clone the repo
 
-```bash
-git clone https://github.com/Prince-Singh-Dev/Authsphere.git
-cd Authsphere
+```
+git clone https://github.com/your-username/AuthSphere.git
+cd AuthSphere
 ```
 
-### 2. Install Dependencies
+### Run Backend
 
-```bash
-# For backend
+```
 cd server
 npm install
-
-# For frontend
-cd ../client
-npm install
+npm run server
 ```
 
-### 3. Environment Variables
-
-Create a `.env` file in the server folder:
+### Run Frontend
 
 ```
-PORT=5000
-MONGO_URI=your_mongodb_connection
-JWT_SECRET=your_secret_key
-```
-
-### 4. Run the Application
-
-```bash
-# Start backend
-cd server
-npm run dev
-
-# Start frontend
 cd client
-npm start
+npm install
+npm run dev
 ```
 
 ---
 
-##  Live Demo
+## 🌍 Deployment
 
-🔗 Live Website: 
-🔗 Backend API: 
+* Backend deployed on Render (Web Service)
+* Frontend deployed on Render (Static Site)
+* CORS configured for cross-origin requests
+* Cookies configured with:
 
----
-
-##  Screenshots
-
-(Adding screenshots here of login/signup/dashboard)
-
----
-
-##  Future Enhancements
-
-*  Refresh Token System
-*  Email Verification
-*  OAuth (Google Login)
-*  User Dashboard
-*  Role-Based Access Control
+  * `httpOnly`
+  * `secure`
+  * `sameSite: "none"`
 
 ---
 
-##  Contributing
+## 💡 Future Improvements
 
-Contributions are welcome! Feel free to fork this repo and submit a pull request.
-
----
-
-##  License
-
-This project is licensed under the MIT License.
+* 🔄 Refresh Token System
+* 🔑 Google OAuth Integration
+* 🚫 Rate Limiting & Brute Force Protection
+* 📊 User Dashboard
 
 ---
 
-##  Author
+## 🙌 Author
 
-Prince Singh
- [princesingh6173@gmail.com](mailto:princesingh6173@gmail.com)
- GitHub: https://github.com/Prince-Singh-Dev
+Built with 💻 by you (update your name here)
 
 ---
+
+## ⭐ If you like this project
+
+Give it a star ⭐ on GitHub and feel free to fork!
