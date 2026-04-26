@@ -5,9 +5,9 @@ import axios from 'axios'
 import { AppContent } from '../../context/AppContext'
 import { toast } from 'react-toastify'
 
-const EmailVerify = () => {
+axios.defaults.withCredentials = true;
 
-  axios.defaults.withCredentials = true;
+const EmailVerify = () => {
   const {backendUrl , isLoggedin , userData , getUserData} = useContext(AppContent)
 
   const navigate = useNavigate()
