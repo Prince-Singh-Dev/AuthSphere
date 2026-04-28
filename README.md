@@ -143,7 +143,7 @@ npm run dev
 
 ## 🙌 Author
 
-Built with 💻 by you (update your name here)
+Built by Prince Singh
 
 ---
 
